@@ -20,5 +20,5 @@ export const env = {
     GEMINI_API_KEY: process.env.GEMINI_API_KEY as string,
     RESEND_API_KEY: process.env.RESEND_API_KEY as string,
     EMAIL_FROM: process.env.EMAIL_FROM as string,
-    CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
 };

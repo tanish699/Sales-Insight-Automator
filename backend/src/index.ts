@@ -22,9 +22,10 @@ const app = express();
 app.use(helmet());
 app.use(
     cors({
-        origin: env.CORS_ORIGIN,
+        origin: env.CORS_ORIGIN === '*' ? true : env.CORS_ORIGIN,
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: env.CORS_ORIGIN !== '*',
     })
 );
 
@@ -51,6 +52,16 @@ app.use(
         customCss: '.swagger-ui .topbar { background-color: #1a3c6e; }',
     })
 );
+
+// ─── Root Route ─────────────────────────────────────────────────────
+app.get('/', (_req, res) => {
+    res.status(200).json({
+        name: 'Sales Insight Automator API',
+        version: '1.0.0',
+        docs: '/docs',
+        health: '/health',
+    });
+});
 
 // ─── Health Check ───────────────────────────────────────────────────
 app.get('/health', (_req, res) => {
